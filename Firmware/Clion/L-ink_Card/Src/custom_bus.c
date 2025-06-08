@@ -271,13 +271,13 @@ int32_t  BSP_I2C1_ReadReg16(uint16_t DevAddr, uint16_t Reg, uint8_t *pData, uint
  
   if (HAL_I2C_Mem_Read(&hi2c1, DevAddr, Reg, I2C_MEMADD_SIZE_16BIT, pData, Length, BUS_I2C1_POLL_TIMEOUT) != HAL_OK)
   {
-    if (HAL_I2C_GetError(&hi2c1) != HAL_I2C_ERROR_AF)
+    if (HAL_I2C_GetError(&hi2c1) == HAL_I2C_ERROR_AF)
     {
-      ret =  BSP_ERROR_BUS_ACKNOWLEDGE_FAILURE;
+      ret = BSP_ERROR_BUS_ACKNOWLEDGE_FAILURE;
     }
     else
     {
-      ret =  BSP_ERROR_PERIPH_FAILURE;
+      ret = BSP_ERROR_PERIPH_FAILURE;
     }
   }
   return ret;
@@ -295,13 +295,13 @@ int32_t BSP_I2C1_Send(uint16_t DevAddr, uint8_t *pData, uint16_t Length) {
   
   if (HAL_I2C_Master_Transmit(&hi2c1, DevAddr, pData, Length, BUS_I2C1_POLL_TIMEOUT) != HAL_OK)
   {
-    if (HAL_I2C_GetError(&hi2c1) != HAL_I2C_ERROR_AF)
+    if (HAL_I2C_GetError(&hi2c1) == HAL_I2C_ERROR_AF)
     {
       ret = BSP_ERROR_BUS_ACKNOWLEDGE_FAILURE;
     }
     else
     {
-      ret =  BSP_ERROR_PERIPH_FAILURE;
+      ret = BSP_ERROR_PERIPH_FAILURE;
     }
   }
 
@@ -320,13 +320,13 @@ int32_t BSP_I2C1_Recv(uint16_t DevAddr, uint8_t *pData, uint16_t Length) {
   
   if (HAL_I2C_Master_Receive(&hi2c1, DevAddr, pData, Length, BUS_I2C1_POLL_TIMEOUT) != HAL_OK)
   {
-    if (HAL_I2C_GetError(&hi2c1) != HAL_I2C_ERROR_AF)
+    if (HAL_I2C_GetError(&hi2c1) == HAL_I2C_ERROR_AF)
     {
       ret = BSP_ERROR_BUS_ACKNOWLEDGE_FAILURE;
     }
     else
     {
-      ret =  BSP_ERROR_PERIPH_FAILURE;
+      ret = BSP_ERROR_PERIPH_FAILURE;
     }
   }
   return ret;
